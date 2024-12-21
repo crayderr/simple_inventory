@@ -9,3 +9,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+Route::get(
+    'products',
+    [App\Http\Controllers\Api\GetProductsController::class, '__invoke']
+)->middleware('auth:sanctum');
