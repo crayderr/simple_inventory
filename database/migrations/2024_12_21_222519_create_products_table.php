@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('category');
-            $table->decimal('price', 10, 2);
+            $table->int('price');
             $table->string('sku');
             $table->timestamps();
         });

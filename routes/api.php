@@ -12,5 +12,15 @@ Route::get('/user', function (Request $request) {
 
 Route::get(
     'products',
-    [App\Http\Controllers\Api\GetProductsController::class, '__invoke']
+    [App\Http\Controllers\Api\Product\GetProductsController::class, '__invoke']
+)->middleware('auth:sanctum');
+
+Route::get(
+    'products/{id}',
+    [App\Http\Controllers\Api\Product\GetProductDetailController::class, '__invoke']
+)->middleware('auth:sanctum');
+
+Route::post(
+    'products',
+    [App\Http\Controllers\Api\Product\CreateProductController::class, '__invoke']
 )->middleware('auth:sanctum');

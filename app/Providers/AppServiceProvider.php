@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // ProductRepository
+        $this->app->bind(
+            \Deacero\Api\Product\Domain\ProductRepository::class,
+            \Deacero\Api\Product\Infrastructure\ProductRepositoryEloquent::class
+        );
     }
 }
