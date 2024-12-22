@@ -48,4 +48,10 @@ class ProductRepositoryEloquent implements ProductRepository
                 'sku'         => $product->sku(),
             ]);
     }
+
+    public function delete(Product $product): void
+    {
+        ProductModel::where('id', $product->id())
+            ->delete();
+    }
 }
