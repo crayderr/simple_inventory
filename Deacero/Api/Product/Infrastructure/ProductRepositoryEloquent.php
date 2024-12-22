@@ -22,4 +22,30 @@ class ProductRepositoryEloquent implements ProductRepository
             'sku'         => $category->sku(),
         ]);
     }
+
+    public function find(string $id): Product
+    {
+        $product = ProductModel::find($id);
+
+        return Product::create(
+            id:          $product->id,
+            name:        $product->name,
+            description: $product->description,
+            category:    $product->category,
+            price:       $product->price,
+            sku:         $product->sku,
+        );
+    }
+
+    public function update(Product $product): void
+    {
+        ProductModel::where('id', $product->id())
+            ->update([
+                'name'        => $product->name(),
+                'description' => $product->description(),
+                'category'    => $product->category(),
+                'price'       => $product->price(),
+                'sku'         => $product->sku(),
+            ]);
+    }
 }

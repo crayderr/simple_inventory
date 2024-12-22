@@ -11,15 +11,27 @@ class ProductRepositoryFake implements ProductRepository
 {
     public array $inMemoryProducts = [];
     public bool $createWasCalled = false;
+    public bool $updateWasCalled = false;
 
     public function __construct()
     {
         $this->inMemoryProducts = [];
     }
 
-    public function create(Product $category): void
+    public function create(Product $product): void
     {
-        $this->inMemoryProducts[] = $category;
+        $this->inMemoryProducts[$product->id()] = $product;
         $this->createWasCalled = true;
+    }
+
+    public function find(string $id): Product
+    {
+        return $this->inMemoryProducts[$id];
+    }
+
+    public function update(Product $product): void
+    {
+        $this->inMemoryProducts[$product->id()] = $product;
+        $this->updateWasCalled = true;
     }
 }

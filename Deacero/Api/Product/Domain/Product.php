@@ -36,6 +36,20 @@ final class Product
         return $product;
     }
 
+    public function update(
+        string $name,
+        string $description,
+        string $category,
+        int $price,
+        string $sku,
+    ): void {
+        $this->name        = $name;
+        $this->description = $description;
+        $this->category    = $category;
+        $this->price       = $price;
+        $this->sku         = $sku;
+    }
+
     public function id(): string
     {
         return $this->id;
