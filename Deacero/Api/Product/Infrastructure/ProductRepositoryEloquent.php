@@ -25,7 +25,7 @@ class ProductRepositoryEloquent implements ProductRepository
 
     public function find(string $id): Product
     {
-        $product = ProductModel::find($id);
+        $product = ProductModel::findOrFail($id);
 
         return Product::create(
             id:          $product->id,

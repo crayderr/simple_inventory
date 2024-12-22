@@ -24,3 +24,8 @@ Route::post(
     'products',
     [App\Http\Controllers\Api\Product\CreateProductController::class, '__invoke']
 )->middleware('auth:sanctum');
+
+Route::put(
+    'products/{id}',
+    [App\Http\Controllers\Api\Product\UpdateProductController::class, '__invoke']
+)->middleware('auth:sanctum');
