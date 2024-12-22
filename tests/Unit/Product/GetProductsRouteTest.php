@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Product\Unit;
 
 use App\Models\User;
 use Tests\Factories\ProductFactory;
@@ -28,7 +28,7 @@ class GetProductsRouteTest extends TestCase
         $this->withExceptionHandling();
 
         $user   = User::factory()->create();
-        $this->actingAs(User::find(1));
+        $this->actingAs($user);
 
         for ($i = 0; $i < 5; $i++) {
             $product = ProductFactory::create();

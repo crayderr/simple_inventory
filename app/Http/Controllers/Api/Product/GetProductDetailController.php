@@ -12,7 +12,7 @@ class GetProductDetailController extends Controller
 {
     public function __invoke(GetProductsRequest $request, string $productId)
     {
-        $products = Product::select('id', 'name', 'price', 'description')
+        $products = Product::select('id', 'name', 'price', 'description', 'category', 'sku')
             ->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'like', "%{$request->search}%");
             })
