@@ -1,66 +1,304 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Deacero - Simple Inventory
+Instalar proyecto
+--
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Requisitos previos**
 
-## About Laravel
+ - Instalar composer
+ - Instalar servidor local, se recomienda ([Laragon](https://laragon.org/download/index.html)) o docker con ([Laradock](https://laradock.io/))
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Requisitos del servidor**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+ - PHP >= 8.2.0
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Ejecutar el proyecto
 
-## Learning Laravel
+### **Para ejecutar el proyecto debe realizar los siguientes pasos:**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clonar, instalar las dependencias:
+ ```
+ git https://github.com/crayderr/simple_inventory.git
+ composer install
+ ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Copiar el archivo `.env.example` como `.env`:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+cp .env.example .env
+```
 
-## Laravel Sponsors
+3. Configurar la base de datos en el archivo `.env` (por defecto se utilizará sqlite)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-### Premium Partners
+4. Generar una APP_KEY para la aplicación:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+php artisan key:generate
+```
+5. Ejecutar las migraciones y seeder para crear las tablas y los datos por defecto:
 
-## Contributing
+```
+php artisan migrate:fresh
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Comandos para test
 
-## Code of Conduct
+ - Ejecutar los test
+`php artisan test`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+ - Ejecutar un test de forma especifica
+`php artisan test --filter methodNameTest`
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## **Documentación de la API**
+
+### **Listar productos**
+---
+
+```
+url: /api/products'
+method: GET
+auth: SI
+params: {
+    'search'     => 'sometimes|string',
+    'category'   => 'sometimes|string',
+    'price'      => 'sometimes|numeric',
+    'limit'      => 'sometimes|integer',
+}
+```
+
+- Ejemplo de respuesta
+
+```json
+{
+    "data": [
+        {
+            "id": "d8022072-8b64-3cdd-98af-58bd9e182cb6",
+            "name": "Leonel Will II",
+            "description": "Vel dolorum sit magnam delectus perferendis. Quibusdam quidem dolor in temporibus maiores. Rem pariatur nemo suscipit ducimus magni molestiae facere.",
+            "category": "aliquid",
+            "price": 2956,
+            "sku": "Magni."
+        }
+    ],
+    "links": {
+        "first": "http://127.0.0.1:8000/api/products?page=1",
+        "last": null,
+        "prev": null,
+        "next": "http://127.0.0.1:8000/api/products?page=2"
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "path": "http://127.0.0.1:8000/api/products",
+        "per_page": "1",
+        "to": 1
+    }
+}
+```
+
+### **Crear un producto**
+---
+
+```
+url: /api/products'
+method: POST
+auth: SI
+params: {
+    'name'        => 'required|string',
+    'description' => 'required|string',
+    'category'    => 'required|string',
+    'price'       => 'required|numeric',
+    'sku'         => 'required|string',
+}
+```
+
+- Ejemplo de respuesta
+
+```json
+{
+    "id": "d8022072-8b64-3cdd-98af-58bd9e182cb6",
+}
+```
+
+### **Actualizar un producto**
+---
+
+```
+url: /api/products/{id}'
+method: PUT
+auth: SI
+params: {
+    'name'        => 'sometimes|string',
+    'description' => 'sometimes|string',
+    'category'    => 'sometimes|string',
+    'price'       => 'sometimes|numeric',
+    'sku'         => 'sometimes|string',
+}
+```
+
+- Ejemplo de respuesta
+
+```json
+{
+    "success": true,
+}
+```
+
+### **Eliminar un producto**
+---
+
+```
+url: /api/products/{id}'
+method: DELETE
+auth: SI
+```
+
+- Ejemplo de respuesta
+
+```json
+{
+    "success": true,
+}
+```
+
+### **Obtener un producto**
+---
+
+```
+url: /api/products/{id}'
+method: GET
+auth: SI
+```
+
+- Ejemplo de respuesta
+
+```json
+{
+    "data": {
+        "id": "d8022072-8b64-3cdd-98af-58bd9e182cb6",
+        "name": "Leonel Will II",
+        "description": "Vel dolorum sit magnam delectus perferendis. Quibusdam quidem dolor in temporibus maiores. Rem pariatur nemo suscipit ducimus magni molestiae facere.",
+        "category": "aliquid",
+        "price": 2956,
+        "sku": "Magni."
+    }
+}
+```
+
+### **Listar inventario de una tienda**
+
+```
+url: api/stores/{id}/inventory'
+method: GET
+auth: SI
+```
+
+- Ejemplo de respuesta
+
+```json
+
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": "51adfedf-bd83-3d2a-b1f1-e21ec52ba0e1",
+            "product_id": "f5f0f7c7-1c29-3aaa-ba18-cf1bbe07978e",
+            "store_id": "338ce7e3-4d4a-3a20-b810-dddc2b7b282d",
+            "quantity": 47,
+            "name": "Theo Dibbert",
+            "price": 2446
+        }
+    ],
+    "first_page_url": "http://127.0.0.1:8000/api/stores/338ce7e3-4d4a-3a20-b810-dddc2b7b282d/inventory?page=1",
+    "from": 1,
+    "next_page_url": null,
+    "path": "http://127.0.0.1:8000/api/stores/338ce7e3-4d4a-3a20-b810-dddc2b7b282d/inventory",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1
+}
+
+```
+
+### **Transferir inventario de una tienda a otra**
+
+```
+url: api/inventory/transfer'
+method: POST
+auth: SI
+params: {
+    'product_id'        => 'required|string',
+    'source_store_id'   => 'required|string',
+    'target_store_id'   => 'required|string',
+    'quantity'          => 'required|numeric',
+}
+```
+
+- Ejemplo de respuesta
+
+```json
+{
+    "success": true,
+}
+```
+
+### **Listar productos con stock bajo**
+
+```
+url: /api/inventory/alerts'
+
+method: GET
+auth: SI
+```
+
+- Ejemplo de respuesta
+
+```json
+{
+    "data": [
+        {
+            "id": "c226e3f9-5338-31f2-8ffd-8814c4d8f05d",
+            "name": "Leonel Will II",
+            "description": "Vel dolorum sit magnam delectus perferendis. Quibusdam quidem dolor in temporibus maiores. Rem pariatur nemo suscipit ducimus magni molestiae facere.",
+            "category": "aliquid",
+            "price": 2956,
+            "sku": "Magni.",
+            "quantity": 8
+        }
+    ],
+    "links": {
+        "first": "http://127.0.0.1:8000/api/inventory/alerts?page=1",
+        "last": null,
+        "prev": null,
+        "next": "http://127.0.0.1:8000/api/inventory/alerts?page=2"
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "path": "http://127.0.0.1:8000/api/inventory/alerts",
+        "per_page": "1",
+        "to": 1
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+.
