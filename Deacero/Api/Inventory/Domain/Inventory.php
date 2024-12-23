@@ -10,7 +10,7 @@ final class Inventory
         private string $id,
         private string $productId,
         private string $storeId,
-        private string $quantity,
+        private int $quantity,
         private int $minQuantity,
     ) {
     }
@@ -19,7 +19,7 @@ final class Inventory
         string $id,
         string $productId,
         string $storeId,
-        string $quantity,
+        int $quantity,
         int $minQuantity,
     ): self {
         $product = self::fromPrimitives(
@@ -31,6 +31,16 @@ final class Inventory
         );
 
         return $product;
+    }
+
+    public function substractQuantity(int $quantity): void
+    {
+        $this->quantity -= $quantity;
+    }
+
+    public function addQuantity(int $quantity): void
+    {
+        $this->quantity += $quantity;
     }
 
     public function id(): string
@@ -48,7 +58,7 @@ final class Inventory
         return $this->storeId;
     }
 
-    public function quantity(): string
+    public function quantity(): int
     {
         return $this->quantity;
     }
@@ -62,7 +72,7 @@ final class Inventory
         string $id,
         string $productId,
         string $storeId,
-        string $quantity,
+        int $quantity,
         int $minQuantity,
     ): self {
         return new self(
