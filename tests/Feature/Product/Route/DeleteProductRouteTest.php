@@ -6,12 +6,9 @@ use App\Models\User;
 use Tests\Factories\ProductFactory;
 use Illuminate\Foundation\Testing\TestCase;
 use Deacero\Api\Product\Domain\ProductRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 
 class DeleteProductRouteTest extends TestCase
 {
-    use RefreshDatabase;
     private ProductRepository $productRepository;
 
     protected function setUp(): void

@@ -10,6 +10,7 @@ class Inventory extends Model
     public $incrementing = false;
 
     protected $fillable = [
+        'id',
         'product_id',
         'store_id',
         'quantity',
