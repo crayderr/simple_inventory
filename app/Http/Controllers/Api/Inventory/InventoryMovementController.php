@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\Inventory;
 
-use App\Models\Inventory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
