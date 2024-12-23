@@ -34,4 +34,9 @@ class ProductRepositoryFake implements ProductRepository
         $this->inMemoryProducts[$product->id()] = $product;
         $this->updateWasCalled = true;
     }
+
+    public function delete(Product $product): void
+    {
+        unset($this->inMemoryProducts[$product->id()]);
+    }
 }
