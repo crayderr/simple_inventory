@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Factories;
+namespace Tests\src\Factories;
 
 use Deacero\Api\Product\Domain\Product;
 

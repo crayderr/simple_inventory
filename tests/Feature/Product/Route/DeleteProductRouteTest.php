@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Product\Unit;
+namespace Tests\Feature\Product\Route;
 
 use App\Models\User;
 use Tests\Factories\ProductFactory;
