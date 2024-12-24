@@ -22,9 +22,9 @@ services:
     volumes:
       - ./docker/postgres/data:/var/lib/postgres/data
     environment:
-      - POSTGRES_DB=TESTING
-      - POSTGRES_USER=TESTING
-      - POSTGRES_PASSWORD=TESTING
+      - POSTGRES_DB=testing
+      - POSTGRES_USER=testing
+      - POSTGRES_PASSWORD=testing
     ports:
       - "5432:5432"
     networks:
