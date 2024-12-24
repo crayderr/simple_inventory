@@ -2,6 +2,8 @@
 Instalar proyecto
 --
 
+# Usando un servidor local
+
 **Requisitos previos**
 
  - Instalar composer
@@ -49,6 +51,21 @@ php artisan key:generate
 php artisan migrate:fresh
 ```
 
+# Usando Docker
+
+**Requisitos previos**
+
+ - Instalar docker, docker-compose, git, make
+
+### **Para inicializar el proyecto debe realizar los siguientes pasos:**
+
+ ```
+    git clone https://github.com/crayderr/simple_inventory.git
+    cd simple_inventory
+    make init
+```
+
+
 ### Comandos para test
 
  - Ejecutar los test
@@ -56,8 +73,6 @@ php artisan migrate:fresh
 
  - Ejecutar un test de forma especifica
 `php artisan test --filter methodNameTest`
-
-
 
 
 ## **Documentación de la API**
