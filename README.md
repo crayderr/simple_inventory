@@ -62,6 +62,42 @@ php artisan migrate:fresh
 
 ## **Documentación de la API**
 
+datos de prueba
+- email:
+    -   super@admin.com
+- password:
+    -   12345678
+
+### **Obtener un token de acceso**
+
+```
+url: /api/login
+method: POST
+params: {
+    'email'    => 'required|email',
+    'password' => 'required|string',
+}
+```
+
+- Ejemplo de respuesta
+
+```json
+{
+    "message": "Login successful",
+    "token": "1|aKVLkHyhiyp5TzstfPbCFou6sqmj2ii5tvS2QIJPde1b85d7",
+    "user": {
+        "id": 1,
+        "name": "Super admin",
+        "email": "super@admin.com",
+        "email_verified_at": "2024-12-24T14:27:07.000000Z",
+        "created_at": "2024-12-24T14:27:08.000000Z",
+        "updated_at": "2024-12-24T14:27:08.000000Z"
+    }
+}
+
+```
+
+
 ### **Listar productos**
 ---
 
@@ -69,6 +105,9 @@ php artisan migrate:fresh
 url: /api/products'
 method: GET
 auth: SI
+headers: {
+    'Authorization Bearer {token}'
+}
 params: {
     'search'     => 'sometimes|string',
     'category'   => 'sometimes|string',
@@ -114,6 +153,9 @@ params: {
 url: /api/products'
 method: POST
 auth: SI
+headers: {
+    'Authorization Bearer {token}'
+}
 params: {
     'name'        => 'required|string',
     'description' => 'required|string',
@@ -138,6 +180,9 @@ params: {
 url: /api/products/{id}'
 method: PUT
 auth: SI
+headers: {
+    'Authorization Bearer {token}'
+}
 params: {
     'name'        => 'sometimes|string',
     'description' => 'sometimes|string',
@@ -162,6 +207,9 @@ params: {
 url: /api/products/{id}'
 method: DELETE
 auth: SI
+headers: {
+    'Authorization Bearer {token}'
+}
 ```
 
 - Ejemplo de respuesta
@@ -179,6 +227,9 @@ auth: SI
 url: /api/products/{id}'
 method: GET
 auth: SI
+headers: {
+    'Authorization Bearer {token}'
+}
 ```
 
 - Ejemplo de respuesta
@@ -202,6 +253,9 @@ auth: SI
 url: api/stores/{id}/inventory'
 method: GET
 auth: SI
+headers: {
+    'Authorization Bearer {token}'
+}
 ```
 
 - Ejemplo de respuesta
@@ -237,6 +291,9 @@ auth: SI
 url: api/inventory/transfer'
 method: POST
 auth: SI
+headers: {
+    'Authorization Bearer {token}'
+}
 params: {
     'product_id'        => 'required|string',
     'source_store_id'   => 'required|string',
@@ -260,6 +317,9 @@ url: /api/inventory/alerts'
 
 method: GET
 auth: SI
+headers: {
+    'Authorization Bearer {token}'
+}
 ```
 
 - Ejemplo de respuesta
@@ -292,13 +352,3 @@ auth: SI
     }
 }
 ```
-
-
-
-
-
-
-
-
-
-.
